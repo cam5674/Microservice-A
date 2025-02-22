@@ -1,3 +1,5 @@
+import io
+
 from rich.console import Console
 from rich.table import Table
 
@@ -14,6 +16,9 @@ def create_table(data):
     table = create_columns()
     for dic in data:
         table.add_row(dic["departure"], dic["destination"],
-                  dic["departure time"], dic["arrival time"])
-    console = Console(color_system="windows")
+                  dic["departure time"], dic["arrival time"])\
+    # save print as memory(string)
+    console = Console(file=io.StringIO(), width=120)
     console.print(table)
+
+    return console.file.getvalue()

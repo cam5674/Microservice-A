@@ -25,7 +25,7 @@ while True:
         if "departure" in dic:
             # figure out how to send back table
             table = create_table(jinfo)
-            socket.send_string("Created Table")
+            socket.send_string(table)
             break
         if "SID" in dic:
             print(jinfo)

@@ -13,7 +13,7 @@ socket = context.socket(zmq.REQ)
 socket.connect("tcp://localhost:5556")
 
 print("Sending request...")
-# example data: [
+# print out all available shuttles
 
 data_test = [
      {
@@ -40,6 +40,7 @@ data_test = [
 
 # username: bob123, SID: 12347
 
+# for deleting a shuttle request
 # test_id = {"username": "bob123", "SID": 12347}
 json_data = json.dumps(data_test)
 socket.send_string(json_data)
