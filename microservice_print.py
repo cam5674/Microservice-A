@@ -15,8 +15,13 @@ def create_columns():
 def create_table(data):
     table = create_columns()
     for dic in data:
-        table.add_row(dic["departure"], dic["destination"],
-                  dic["departure time"], dic["arrival time"])\
+        print(dic)
+        if "type" in dic:
+            continue
+        else:
+            print("add row")
+            table.add_row(dic["departure"], dic["destination"],
+                      dic["departure time"], dic["arrival time"])\
     # save print as memory(string)
     console = Console(file=io.StringIO(), width=120)
     console.print(table)
