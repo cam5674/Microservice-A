@@ -15,7 +15,7 @@ socket.connect("tcp://localhost:5556")
 print("Sending request...")
 # print out all available shuttles
 
-data_test = [{"type": "print"},
+print_test = [{"type": "print"},
      {
      "id": 12345,
      "departure": "Station A",
@@ -41,7 +41,7 @@ data_test = [{"type": "print"},
 # username: bob123, SID: 12347
 
 # for deleting a shuttle request
-# test_id = {"type": SID, "username": "bob123", "SID": 12347}
+test_id = {"type": "SID", "username": "bob123", "SID": 12347}
 
 
 # data for picking a shuttle time that is the closest to the user's desired time
@@ -116,9 +116,12 @@ requested_time_data =[ {"type": "requested time", "rt": "2025-02-15T14:47:00Z"},
                            "departure time": "2025-02-16T18:10:00Z",
                            "arrival time": "2025-02-16T18:50:00Z"
                        } ]
-json_data = json.dumps(requested_time_data)
+
+# send data to server
+json_data = json.dumps(test_id)
 socket.send_string(json_data)
 
 # Get reply
 repy = socket.recv_string()
+print("Received")
 print(repy)

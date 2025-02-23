@@ -3,8 +3,16 @@ import json
 
 # read JSON file and then delete the id in the file
 def delete_id(data):
-    del data['SID']
+    """
+    Deletes the SID from the JSON and writes a new file.
+    :param data: dictionary
+    :return: dictionary with null as the SID
+    """
+    data['SID'] = None
 
+    with open("database.json", "w") as f:
+        json.dump(data, f, indent=4)
+        f.close()
     new_data = json.dumps(data)
     return new_data
 

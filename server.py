@@ -11,38 +11,37 @@ context = zmq.Context()
 socket = context.socket(zmq.REP)
 socket.bind("tcp://*:5556")
 
-# could add a type in the json so you know what the request is
-# example: "type": delete   "type": print table
+
 while True:
     # get info from client
     info = socket.recv_string()
 
     # convert into json
     jinfo = json.loads(info)
-    # unpack
-    # print out shuttle times
 
-    for dic in jinfo:
-
-        if dic.get("type") == "print":
-            print("print")
-            # figure out how to send back table
-            table = create_table(jinfo)
-            socket.send_string(table)
-            break
-        elif "SID" in dic:
-            print("SID")
-            print(jinfo)
-            print(dic)
+    # delete user shuttle ID
+    if isinstance(jinfo, dict):
+        if jinfo.get("type") == "SID":
+            print("requested SID deletion...")
             new_data = delete_id(jinfo)
-            print(new_data)
-            socket.send_string("Deleted SID")
+            socket.send_string(f"Deleted SID {new_data}")
             break
-        elif dic.get("type") == "requested time":
-            print("requested time")
-            sorted_times = convert_time(jinfo)
-            json_data = json.dumps(sorted_times)
-            socket.send_string(json_data)
+    else:
+        for dic in jinfo:
+            # print out shuttle times
+            if dic.get("type") == "print":
+                print("requested print table...")
+                # figure out how to send back table
+                table = create_table(jinfo)
+                socket.send_string(table)
+                break
+
+            # find closest time to requested time
+            elif dic.get("type") == "requested time":
+                print("requested time...")
+                sorted_times = convert_time(jinfo)
+                json_data = json.dumps(sorted_times)
+                socket.send_string(json_data)
 
     time.sleep(1)
 
