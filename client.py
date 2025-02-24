@@ -1,9 +1,21 @@
 import zmq
 import json
-
 """
-Will send the specific data/request to be fulfilled. Will need to be in a 
-specific format.
+This client can send a request to the microservice to create a table, a JSON
+containing an organized list of dictionaries that are ordered by the shortest
+difference to the requested time, or a JSON with the deleted SID.
+
+To use the microservice make sure that the type of request is correct.
+
+Types:
+
+print--> creates a table of arrival and departing shuttle times
+
+requested time --> creates a JSON containing an organized list of dictionaries 
+that are ordered by the shortest difference to the requested time.
+
+SID --> creates a JSON with the deleted SID set to null
+
 """
 
 print("Connecting to server...")
@@ -14,7 +26,7 @@ socket.connect("tcp://localhost:5556")
 print("Sending request...")
 
 # Example data for printing out arriving and departing shuttles
-print_test = [{"type": "print"},
+test_print = [{"type": "print"},
               {
      "id": 12345,
      "departure": "Station A",
@@ -40,12 +52,12 @@ print_test = [{"type": "print"},
 # username: bob123, SID: 12347
 
 # for deleting a shuttle request
-test_id = {"type": "SID", "username": "bob123", "SID": 12347}
+test_sid = {"type": "SID", "username": "bob123", "SID": 12347}
 
 
 # Example data for picking a shuttle time that is the shortest difference
 # to the user's desired time
-requested_time_data = [{"type": "requested time", "time": "2025-02-15T14:47:00Z"},
+test_requested_time = [{"type": "requested time", "time": "2025-02-15T08:47:00Z"},
                        {
                            "id": 12357,
                            "departure": "Station A",
@@ -118,7 +130,7 @@ requested_time_data = [{"type": "requested time", "time": "2025-02-15T14:47:00Z"
                        }]
 
 # send data to server
-json_data = json.dumps(requested_time_data)
+json_data = json.dumps(test_print)
 socket.send_string(json_data)
 
 # Get reply

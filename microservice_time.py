@@ -23,6 +23,8 @@ def convert_time(info):
             rt = datetime.fromisoformat(dic["time"])
         if "departure time" in dic:
             id_time = datetime.fromisoformat(dic['departure time']), dic['id']
+            abs_time = abs(id_time[0] - rt)
+            id_time = abs_time, id_time[1]
             arrival_times.append(id_time)
 
     # To sort the times
@@ -30,14 +32,14 @@ def convert_time(info):
 
     # Sort times, shortest difference to requested time
     # try to put in loop above
-    for time in arrival_times:
-        abs_time = abs(time[0] - rt)
-        id_time = abs_time, time[1]
-        time_difference.append(id_time)
+   # for time in arrival_times:
+    #    abs_time = abs(time[0] - rt)
+     #   id_time = abs_time, time[1]
+      #  time_difference.append(id_time)
 
-    print(time_difference)
+    print(arrival_times)
     # sort by ints(time)
-    times = sorted(time_difference, key=lambda i: i[0])
+    times = sorted(arrival_times, key=lambda i: i[0])
 
     # make new json file with a list of closest departing times to requested time
     sorted_times = []
