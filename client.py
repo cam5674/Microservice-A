@@ -26,7 +26,9 @@ socket.connect("tcp://localhost:5556")
 print("Sending request...")
 
 # Example data for printing out arriving and departing shuttles
-test_print = [{"type": "print"},
+test_print = [
+
+    {"type": "print"},
               {
      "id": 12345,
      "departure": "Station A",
@@ -130,7 +132,7 @@ test_requested_time = [{"type": "requested time", "time": "2025-02-15T08:47:00Z"
                        }]
 
 # send data to server
-json_data = json.dumps(test_print)
+json_data = json.dumps(test_requested_time)
 socket.send_string(json_data)
 
 # Get reply
