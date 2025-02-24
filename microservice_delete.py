@@ -1,7 +1,6 @@
 import json
 
 
-# read JSON file and then delete the id in the file
 def delete_id(data):
     """
     Deletes the SID from the JSON and writes a new file.

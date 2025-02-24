@@ -1,10 +1,6 @@
-# start server first
 import json
-from rich.console import Console
-from rich.table import Table
 import zmq
-import time
-from microservice_print  import create_table
+from microservice_print import create_table
 from microservice_delete import delete_id
 from microservice_time import convert_time
 context = zmq.Context()
@@ -36,19 +32,10 @@ while True:
                 socket.send_string(table)
                 break
 
-            # find closest time to requested time
+            # find shortest time difference to requested time
             elif dic.get("type") == "requested time":
                 print("requested time...")
                 sorted_times = convert_time(jinfo)
                 json_data = json.dumps(sorted_times)
                 socket.send_string(json_data)
-
-    time.sleep(1)
-
-
-
-
-
-
-# for the delete user story you can just delete the arrival and departing time
-
+            break

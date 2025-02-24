@@ -1,5 +1,4 @@
 import zmq
-import time
 import json
 
 """
@@ -13,10 +12,10 @@ socket = context.socket(zmq.REQ)
 socket.connect("tcp://localhost:5556")
 
 print("Sending request...")
-# print out all available shuttles
 
+# Example data for printing out arriving and departing shuttles
 print_test = [{"type": "print"},
-     {
+              {
      "id": 12345,
      "departure": "Station A",
      "destination": "Station B",
@@ -34,9 +33,9 @@ print_test = [{"type": "print"},
      "id": 12347,
      "departure": "Station E",
      "destination": "Station F",
-    "departure time": "2025-02-15T14:48:00Z",
+     "departure time": "2025-02-15T14:48:00Z",
      "arrival time": "2025-02-15T16:45:00Z"
-  } ]
+  }]
 
 # username: bob123, SID: 12347
 
@@ -44,8 +43,9 @@ print_test = [{"type": "print"},
 test_id = {"type": "SID", "username": "bob123", "SID": 12347}
 
 
-# data for picking a shuttle time that is the closest to the user's desired time
-requested_time_data =[ {"type": "requested time", "rt": "2025-02-15T14:47:00Z"},
+# Example data for picking a shuttle time that is the shortest difference
+# to the user's desired time
+requested_time_data = [{"type": "requested time", "time": "2025-02-15T14:47:00Z"},
                        {
                            "id": 12357,
                            "departure": "Station A",
@@ -115,10 +115,10 @@ requested_time_data =[ {"type": "requested time", "rt": "2025-02-15T14:47:00Z"},
                            "destination": "Station T",
                            "departure time": "2025-02-16T18:10:00Z",
                            "arrival time": "2025-02-16T18:50:00Z"
-                       } ]
+                       }]
 
 # send data to server
-json_data = json.dumps(test_id)
+json_data = json.dumps(requested_time_data)
 socket.send_string(json_data)
 
 # Get reply
