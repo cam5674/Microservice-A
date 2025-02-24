@@ -27,17 +27,6 @@ def convert_time(info):
             id_time = abs_time, id_time[1]
             arrival_times.append(id_time)
 
-    # To sort the times
-    time_difference = []
-
-    # Sort times, shortest difference to requested time
-    # try to put in loop above
-   # for time in arrival_times:
-    #    abs_time = abs(time[0] - rt)
-     #   id_time = abs_time, time[1]
-      #  time_difference.append(id_time)
-
-    print(arrival_times)
     # sort by ints(time)
     times = sorted(arrival_times, key=lambda i: i[0])
 

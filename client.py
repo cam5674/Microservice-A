@@ -132,7 +132,7 @@ test_requested_time = [{"type": "requested time", "time": "2025-02-15T08:47:00Z"
                        }]
 
 # send data to server
-json_data = json.dumps(test_requested_time)
+json_data = json.dumps(test_sid)
 socket.send_string(json_data)
 
 # Get reply
