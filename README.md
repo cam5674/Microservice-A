@@ -12,3 +12,8 @@ A)
     - This will make a JSON file with the SID set to null.
 
 B) A new JSON file is created if a request "requested time" or "SID" is sent to the microservice. A string will also be sent to the client to confirm the creation of the JSON file. If the requested type is "print" then a stringified table will be sent to the client. The table will be printed to the console for confirmation and the stringified table can be used for other services. 
+
+
+
+
+![image](https://github.com/user-attachments/assets/fccb1e25-f940-45ce-b919-2a16596a921a)
