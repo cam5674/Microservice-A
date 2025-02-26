@@ -15,8 +15,9 @@ while True:
     # convert into json
     jinfo = json.loads(info)
 
-    # delete user shuttle ID
+    # check type of data being sent
     if isinstance(jinfo, dict):
+        # delete user shuttle ID
         if jinfo.get("type") == "SID":
             print("requested SID deletion...")
             new_data = delete_id(jinfo)
